@@ -7,20 +7,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import CreateMessageDTO from 'src/messages/dtos/CreateMessageDTO';
-
-interface IMessagesRepository {
-  findOne(id: string);
-  findAll();
-  create(content: string);
-}
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesService: IMessagesRepository;
-
-  constructor(repo: IMessagesRepository) {
-    this.messagesService = repo;
-  }
+  constructor(public messagesService: MessagesService) {}
 
   @Get()
   listMessages() {
