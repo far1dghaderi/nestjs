@@ -6,22 +6,31 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
+
+interface IClassConstructor {
+  new (...args: any[]): {};
+}
+
+export function Serialize(dto: IClassConstructor) {
+  return UseInterceptors(new SerializeInterceptor(dto));
+}
 
 export class SerializeInterceptor implements NestInterceptor {
+  constructor(private dto: any) {}
+
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
     //everything to do before request reaches to the route handler
-    console.log("Hey, I didn't reach to route handler yet " + context);
-
+    //blah blah
     return next.handle().pipe(
       map((data: any) => {
         //everything to do before we send back the response
-        console.log(
-          "Hey, I'm going to send the response to the client " + data,
-        );
+        return plainToInstance(this.dto, data, {
+          excludeExtraneousValues: true,
+        });
       }),
     );
   }

@@ -8,13 +8,15 @@ import {
   Delete,
   Query,
   NotFoundException,
-  ClassSerializerInterceptor,
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { UpdateUserDTO } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
+import { Serialize } from 'src/Interceptors/serialize.interceptor';
+import { UserDTO } from './dtos/user.dto';
 @Controller('auth')
+@Serialize(UserDTO)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -34,7 +36,8 @@ export class UsersController {
   }
 
   @Get()
-  @UseInterceptors(ClassSerializerInterceptor)
+  // @UseInterceptors(new SerializeInterceptor(UserDTO))
+  // @Serialize(UserDTO)
   findAllUsers(@Query('email') email: string) {
     return this.usersService.find(email);
   }
