@@ -15,7 +15,6 @@ interface IClassConstructor {
 export function Serialize(dto: IClassConstructor) {
   return UseInterceptors(new SerializeInterceptor(dto));
 }
-
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
 
