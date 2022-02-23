@@ -25,7 +25,6 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @UseInterceptors(ClassSerializerInterceptor)
   async findUser(@Param('id') id: string) {
     const user = await this.usersService.findOne(parseInt(id));
     if (!user) {
