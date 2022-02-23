@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   NotFoundException,
-  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { UpdateUserDTO } from './dtos/update-user.dto';
