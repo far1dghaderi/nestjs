@@ -9,7 +9,7 @@ import {
 
 export class CreateReportDTO {
   @IsString()
-  make: string;
+  manufacturer: string;
   @IsString()
   model: string;
   @IsNumber()
@@ -20,7 +20,7 @@ export class CreateReportDTO {
   @Min(0)
   @Max(1000000)
   mileage: number;
-  @IsLatitude()
+  @IsLongitude()
   lng: number;
   @IsLatitude()
   lat: number;
