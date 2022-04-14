@@ -9,6 +9,9 @@ export class ReportDTO {
   price: number;
 
   @Expose()
+  model: string;
+
+  @Expose()
   manufacturer: string;
 
   @Expose()
@@ -22,6 +25,9 @@ export class ReportDTO {
 
   @Expose()
   mileage: number;
+
+  @Expose()
+  approved: boolean;
 
   @Transform(({ obj }) => obj.user.id)
   @Expose()

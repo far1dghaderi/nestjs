@@ -14,9 +14,13 @@ export class Report {
   @Column()
   price: number;
 
+  @Column({ default: false })
+  approved: boolean;
+
   @Column()
   manufacturer: string;
-
+  @Column()
+  model: string;
   @Column()
   year: number;
 
